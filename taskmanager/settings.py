@@ -83,6 +83,9 @@ DATABASES = {
         'PASSWORD': 'secretpassword',
         'HOST': 'db',
         'PORT': '5432',
+        'OPTIONS': {
+            'connect_timeout': 5,
+        }
     }
 }
 
