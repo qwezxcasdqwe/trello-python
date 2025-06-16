@@ -35,6 +35,7 @@ class Task(models.Model):
     assignee = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
     priority = models.CharField(max_length=10, choices=PRIORITY_CHOICES, default='medium')
     deadline = models.DateTimeField(blank=True, null=True)
+    notifed=models.BooleanField(default=False)
     
     def __str__(self):
         return self.title
