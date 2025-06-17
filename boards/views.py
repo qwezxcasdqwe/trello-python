@@ -1,10 +1,9 @@
 from django.shortcuts import render
 from rest_framework import viewsets
-from .models import Board,Column,Task
-from .serializers import BoardSerializer, ColumnSerializer, TaskSerializer
+from .models import Board,Column,Task,Comment
+from .serializers import BoardSerializer, ColumnSerializer, TaskSerializer,CommentSerializer
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import IsAuthenticated
-from .models import Task
 from .permissions import IsAdmin, IsManager, IsMember
 
 class BoardViewSet(viewsets.ModelViewSet):
@@ -33,7 +32,14 @@ class TaskViewSet(ModelViewSet):
             return [IsAdmin() | IsManager()]
         elif self.request.method == 'DELETE':
             return [IsAdmin()]
-        return super().get_permissions()      
+        return super().get_permissions()
+
+class CommentViewSet(viewsets.ModelViewSet):
+  queryset = Comment.objects.all()
+  serializer_class = CommentSerializer
+  
+  def perform_create(self, serializer):
+     serializer.save(author=self.request.user) #подставновка текущего автора при создании комментария
 
     
 
