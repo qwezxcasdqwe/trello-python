@@ -4,7 +4,7 @@ from rest_framework.routers import DefaultRouter
 from boards.views import BoardViewSet, ColumnViewSet, TaskViewSet
 from ..boards.views import CommentViewSet
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
-from views import TelegramAuthView
+from accounts.views import TelegramAuthView
 
 router = DefaultRouter()
 router.register(r'boards', BoardViewSet)
