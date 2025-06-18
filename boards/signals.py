@@ -21,4 +21,14 @@ def log_task_save(sender, instance, created, **kwargs):
         user=user,
         action=action,
         description=f"задача была {action} пользователем {user}" if user else f"Задача была {action}"
-    )   
+    )
+@receiver(post_delete, sender=Task)
+def log_task_delete(sender, instance,**kwargs):
+    user = get_current_user()
+    TaskHistory.objects.create(
+        task = instance,
+        user = user,
+        action = 'deleted',
+        description = f"Задача удалена пользователем {user}" if user else "Задача удалена"
+    )
+           
