@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'django_celery_beat',
     'rest_framework_simplejwt',
+    'accounts',
 ]
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (

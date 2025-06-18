@@ -4,6 +4,7 @@ from rest_framework.routers import DefaultRouter
 from boards.views import BoardViewSet, ColumnViewSet, TaskViewSet
 from ..boards.views import CommentViewSet
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+from views import TelegramAuthView
 
 router = DefaultRouter()
 router.register(r'boards', BoardViewSet)
@@ -15,5 +16,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
     path('api/token', TokenObtainPairView.as_view(), name ='token_obtain_pair'),
-    path('api/token/refresh', TokenObtainPairView.as_view(), name='token_refresh')
+    path('api/token/refresh', TokenObtainPairView.as_view(), name='token_refresh'),
+    path('api/accounts/',include('accounts.urls')),
+    path('telegram-auth/', TelegramAuthView.as_view(), name='telegram-auth'),
 ]
